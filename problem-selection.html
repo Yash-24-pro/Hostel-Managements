@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Problem</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Select Problem</h1>
+    <form id="problemSelectionForm">
+      <div class="input-group">
+        <label for="problem">Select Problem</label>
+        <select id="problem" name="problem" required>
+          <option value="light">Light</option>
+          <option value="fan">Fan</option>
+          <option value="furniture">Furniture</option>
+          <option value="door">Door</option>
+          <option value="mirror">Mirror</option>
+          <option value="washroom">Washroom</option>
+          <option value="others">Others</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="issueDescription">Describe the Issue</label>
+        <textarea id="issueDescription" name="issueDescription" rows="4" required></textarea>
+      </div>
+      <button type="submit">Submit Ticket</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('problemSelectionForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const problem = document.getElementById('problem').value;
+      const issueDescription = document.getElementById('issueDescription').value;
+
+      // Retrieve student details from sessionStorage
+      const blockNumber = sessionStorage.getItem('blockNumber');
+      const wing = sessionStorage.getItem('wing');
+      const roomNumber = sessionStorage.getItem('roomNumber');
+
+      // Create a ticket object
+      const ticket = {
+        id: Date.now(), // Unique ID based on timestamp
+        blockNumber,
+        wing,
+        roomNumber,
+        problem,
+        issueDescription,
+        status: 'Open',
+        timestamp: new Date().toLocaleString(),
+      };
+
+      // Save the ticket in sessionStorage (temporary storage)
+      let tickets = JSON.parse(sessionStorage.getItem('tickets')) || [];
+      tickets.push(ticket);
+      sessionStorage.setItem('tickets', JSON.stringify(tickets));
+
+      // Redirect to the student dashboard
+      window.location.href = 'student.html';
+    });
+  </script>
+</body>
+</html>

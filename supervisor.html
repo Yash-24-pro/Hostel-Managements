@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supervisor Section</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Supervisor Section</h1>
+    <p><a href="index.html">Logout</a></p>
+    <div id="tickets">
+      <h2>Issues Raised by Students</h2>
+      <label for="filterStatus">Filter by Status:</label>
+      <select id="filterStatus">
+        <option value="All">All</option>
+        <option value="Open">Open</option>
+        <option value="Resolved">Resolved</option>
+      </select>
+      <button id="applyFilter">Apply Filter</button>
+      <ul id="ticketList">
+        <!-- Tickets will be dynamically added here -->
+      </ul>
+    </div>
+    <button id="resolveTicket">Mark Ticket as Resolved</button>
+  </div>
+  <div id="notification"></div>
+  <script src="scripts/script.js"></script>
+</body>
+</html>

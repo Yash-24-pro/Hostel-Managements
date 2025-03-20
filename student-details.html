@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Details</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Student Details</h1>
+    <form id="studentDetailsForm">
+      <div class="input-group">
+        <label for="blockNumber">Block Number</label>
+        <input type="number" id="blockNumber" name="blockNumber" min="1" max="6" required>
+      </div>
+      <div class="input-group">
+        <label for="wing">Wing</label>
+        <select id="wing" name="wing" required>
+          <option value="A">A</option>
+          <option value="B">B</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="roomNumber">Room Number (3 digits)</label>
+        <input type="text" id="roomNumber" name="roomNumber" pattern="\d{3}" required>
+      </div>
+      <button type="submit">Proceed</button>
+    </form>
+  </div>
+  <script>
+    // Dummy database for blocks, wings, and rooms
+    const dummyDatabase = {
+      blocks: [1, 2, 3, 4, 5, 6], // Blocks 1 to 6
+      wings: ['A', 'B'], // Wings A and B
+      rooms: Array.from({ length: 999 }, (_, i) => (i + 1).toString().padStart(3, '0')), // Rooms 001 to 999
+    };
+
+    // Validate student details
+    document.getElementById('studentDetailsForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const blockNumber = document.getElementById('blockNumber').value;
+      const wing = document.getElementById('wing').value;
+      const roomNumber = document.getElementById('roomNumber').value;
+
+      // Validate block number
+      if (!dummyDatabase.blocks.includes(Number(blockNumber))) {
+        alert('Invalid block number! Please enter a block number between 1 and 6.');
+        return;
+      }
+
+      // Validate wing
+      if (!dummyDatabase.wings.includes(wing)) {
+        alert('Invalid wing! Please select either A or B.');
+        return;
+      }
+
+      // Validate room number
+      if (!dummyDatabase.rooms.includes(roomNumber)) {
+        alert('Invalid room number! Please enter a 3-digit room number between 001 and 999.');
+        return;
+      }
+
+      // Save details in sessionStorage (temporary storage)
+      sessionStorage.setItem('blockNumber', blockNumber);
+      sessionStorage.setItem('wing', wing);
+      sessionStorage.setItem('roomNumber', roomNumber);
+
+      // Redirect to the problem selection page
+      window.location.href = 'problem-selection.html';
+    });
+  </script>
+</body>
+</html>

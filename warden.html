@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warden Section</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Warden Section</h1>
+    <p><a href="index.html">Logout</a></p>
+    <div id="allTickets">
+      <h2>All Issues</h2>
+      <ul id="ticketList">
+        <!-- Tickets will be dynamically added here -->
+      </ul>
+    </div>
+    <div id="remarks">
+      <h2>Add Remarks</h2>
+      <form id="remarkForm">
+        <div class="input-group">
+          <label for="ticketId">Ticket ID</label>
+          <input type="text" id="ticketId" name="ticketId" required>
+        </div>
+        <div class="input-group">
+          <label for="remark">Remark</label>
+          <textarea id="remark" name="remark" rows="4" required></textarea>
+        </div>
+        <button type="submit">Submit Remark</button>
+      </form>
+    </div>
+  </div>
+  <div id="notification"></div>
+  <script src="scripts/script.js"></script>
+</body>
+</html>

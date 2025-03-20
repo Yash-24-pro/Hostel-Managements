@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Student Dashboard</h1>
+    <p><a href="index.html">Logout</a></p>
+    <div id="ticketStatus">
+      <h2>Your Tickets</h2>
+      <ul id="ticketList">
+        <!-- Tickets will be dynamically added here -->
+      </ul>
+    </div>
+  </div>
+  <script>
+    // Retrieve tickets from sessionStorage
+    const tickets = JSON.parse(sessionStorage.getItem('tickets')) || [];
+
+    // Display tickets
+    const ticketList = document.getElementById('ticketList');
+    if (ticketList) {
+      ticketList.innerHTML = tickets
+        .map(
+          (ticket) => `
+          <li>
+            <strong>Ticket ID:</strong> ${ticket.id}<br>
+            <strong>Block:</strong> ${ticket.blockNumber}<br>
+            <strong>Wing:</strong> ${ticket.wing}<br>
+            <strong>Room:</strong> ${ticket.roomNumber}<br>
+            <strong>Problem:</strong> ${ticket.problem}<br>
+            <strong>Description:</strong> ${ticket.issueDescription}<br>
+            <strong>Status:</strong> ${ticket.status}<br>
+            <strong>Raised On:</strong> ${ticket.timestamp}<br>
+          </li>
+        `
+        )
+        .join('');
+    }
+  </script>
+</body>
+</html>

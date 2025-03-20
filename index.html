@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hostel Management - Login</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Hostel Management System</h1>
+    <form id="loginForm">
+      <h2>Login</h2>
+      <div class="input-group">
+        <label for="role">Select Role</label>
+        <select id="role" name="role" required>
+          <option value="student">Student</option>
+          <option value="supervisor">Supervisor</option>
+          <option value="warden">Warden</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="username" id="usernameLabel">Username</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit">Login</button>
+      <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </form>
+  </div>
+  <script>
+    // Dummy user data for testing
+    const users = [
+      { username: 'student1', password: 'pass123', role: 'student' },
+      { username: 'supervisor1', password: 'pass123', role: 'supervisor' },
+      { username: 'warden1', password: 'pass123', role: 'warden' },
+    ];
+
+    // Dynamically change the label based on the selected role
+    const roleSelect = document.getElementById('role');
+    const usernameLabel = document.getElementById('usernameLabel');
+
+    roleSelect.addEventListener('change', function () {
+      if (roleSelect.value === 'student') {
+        usernameLabel.textContent = 'Username';
+      } else {
+        usernameLabel.textContent = 'Employee ID';
+      }
+    });
+
+    // Handle form submission
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent form submission
+
+      const role = document.getElementById('role').value;
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Find the user in the dummy data
+      const user = users.find(
+        (u) => u.username === username && u.password === password && u.role === role
+      );
+
+      if (user) {
+        // Redirect based on role without showing a popup
+        switch (role) {
+          case 'student':
+            window.location.href = 'student-details.html';
+            break;
+          case 'supervisor':
+            window.location.href = 'supervisor.html';
+            break;
+          case 'warden':
+            window.location.href = 'warden.html';
+            break;
+          default:
+            alert('Invalid role!');
+        }
+      } else {
+        alert('Invalid username, password, or role!');
+      }
+    });
+  </script>
+</body>
+</html>
